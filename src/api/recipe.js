@@ -2,26 +2,33 @@ import * as api from './api.js';
 import { addOwner, endpoints } from './data.js';
 
 
+const pageSize = 5;
+
 export async function getRecentRecipes() {
     return api.get(endpoints.recent);
 }
 
 export async function getRecipes(page, query) {
-    if (query) {
-        query = {
-            name: {
-                $text: {
-                    $search: {
-                        $term: query,
-                        $caseSensitive: false
+    const data = await (() => {
+        if (query) {
+            query = {
+                name: {
+                    $text: {
+                        $search: {
+                            $term: query,
+                            $caseSensitive: false
+                        }
                     }
                 }
-            }
-        };
-        return api.get(endpoints.recipeSearch(page, query));
-    } else {
-        return api.get(endpoints.recipes(page));
-    }
+            };
+            return api.get(endpoints.recipeSearch(page, query, pageSize));
+        } else {
+            return api.get(endpoints.recipes(page, pageSize));
+        }
+    })();
+    data.pages = Math.ceil(data.count / pageSize);
+
+    return data;
 }
 
 export async function getRecipeById(id) {

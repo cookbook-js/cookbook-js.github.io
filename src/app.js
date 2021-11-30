@@ -10,8 +10,8 @@ import { createPage } from './views/create.js';
 import { detailsPage } from './views/details.js';
 import { editPage } from './views/edit.js';
 
-page(addSession());
 page(decorateContext());
+page(addSession());
 page(notify());
 page('/', homePage);
 page('/catalog', catalogPage);

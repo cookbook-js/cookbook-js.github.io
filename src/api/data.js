@@ -1,12 +1,10 @@
 import { getUserData } from '../util.js';
 
 
-const pageSize = 5;
-
 export const endpoints = {
     recent: '/classes/Recipe?limit=3',
-    recipes: (page) => `/classes/Recipe?skip=${(page - 1) * pageSize}&limit=${pageSize}`,
-    recipeSearch: (page, query) => `/classes/Recipe?where=${createQuery(query)}&skip=${(page - 1) * pageSize}&limit=${pageSize}`,
+    recipes: (page, pageSize) => `/classes/Recipe?skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1`,
+    recipeSearch: (page, query, pageSize) => `/classes/Recipe?where=${createQuery(query)}&skip=${(page - 1) * pageSize}&limit=${pageSize}&count=1`,
     recipeDetails: (id) => `/classes/Recipe/${id}?include=owner`,
     createRecipe: '/classes/Recipe',
     recipeById: '/classes/Recipe/',

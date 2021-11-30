@@ -27,4 +27,5 @@ export default function initialize() {
     function boundRender(content) {
         render(content, root);
     }
+
 }
