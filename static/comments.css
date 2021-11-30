@@ -42,3 +42,7 @@
     color: white;
     cursor: pointer;
 }
+
+.comment-date {
+    float: right;
+}

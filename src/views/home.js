@@ -1,4 +1,4 @@
-import { getRecipeById, getRecipes } from '../api/recipe.js';
+import { getRecentRecipes } from '../api/recipe.js';
 import { html, until } from '../lib.js';
 import { spinner } from './common.js';
 
@@ -32,7 +32,7 @@ export function homePage(ctx) {
 }
 
 async function loadRecipes() {
-    const { results: recipes } = await getRecipes();
+    const { results: recipes } = await getRecentRecipes();
 
     if (recipes.length == 0) {
         return html`<p>No recipes found. Be the first to post a recipe!</p>`;
